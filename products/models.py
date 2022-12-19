@@ -11,3 +11,9 @@ class Product(models.Model):
     created_date = models.DateField(auto_now=True)
     modified_date = models.DateField(auto_now_add=True)
     rate = models.FloatField()
+
+
+class Review(models.Model):
+    post = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, related_name="reviews")
+    text = models.TextField()
+    created_date = models.DateField(auto_now=True)
