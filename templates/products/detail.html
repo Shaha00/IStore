@@ -16,17 +16,32 @@
         .comments {
             margin-top: 30px;
         }
-        .comment_block {
+        .review_block {
             height: max-content;
             padding: 10px;
             border: 1px solid #242b2e;
             color: #242b2e;
             background: #bcbcbc;
         }
+        .post img {
+            width: 50%;
+        }
     </style>
     <div class="post">
+        {% if products.image %}
+            <img src="/media/{{ products.image }}" alt="image not found :(">
+        {% else %}
+            <img src="/media/Без%20названия.png" alt="">
+        {% endif %}
         <h1>{{ products.title }}</h1>
         <h5>{{ products.description }}</h5>
+        <div class="categories">
+            {% for category in categories %}
+                <div class="category">
+                    <h6>{{ category.title }}</h6>
+                </div>
+            {% endfor %}
+        </div>
         <div class="dates">
             <h5>{{ products.created_date }}</h5>
             <h5>{{ products.modified_date }}</h5>

@@ -10,11 +10,18 @@
             flex-wrap: wrap;
             padding: 10px;
         }
+        .post img {
+            width: 100%;
+        }
     </style>
     <div class="posts">
         {% for product in products %}
             <div class="card" style="width: 18rem;">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTm_c78mqXxzuLB79k00F10ehjwJr3_5DkqpP_t3O5qvEHoIusf27oMUefoRHNJL4SPC8Y&usqp=CAU" class="card-img-top" alt="Not picture">
+                {% if product.image %}
+                    <img src="/media/{{ product.image }}" alt="image not found :(">
+                {% else %}
+                    <img src="/media/Без%20названия.png" alt="">
+                {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ product.title }}</h5>
                     <h6 class="card-subtitle">{{ product.description }}</h6>

@@ -4,6 +4,10 @@ from django.db import models
 # Create your models here.
 
 
+class Category(models.Model):
+    title = models.CharField(max_length=55)
+
+
 class Product(models.Model):
     image = models.ImageField(blank=True, null=True)
     title = models.CharField(max_length=255)
@@ -11,6 +15,7 @@ class Product(models.Model):
     created_date = models.DateField(auto_now=True)
     modified_date = models.DateField(auto_now_add=True)
     rate = models.FloatField()
+    categories = models.ManyToManyField(Category)
 
 
 class Review(models.Model):
