@@ -16,6 +16,7 @@ class Product(models.Model):
     modified_date = models.DateField(auto_now_add=True)
     rate = models.FloatField()
     categories = models.ManyToManyField(Category)
+    reviewtable = models.BooleanField(default=True)
 
 
 class Review(models.Model):

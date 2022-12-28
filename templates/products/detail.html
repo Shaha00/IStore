@@ -46,13 +46,21 @@
             <h5>{{ products.created_date }}</h5>
             <h5>{{ products.modified_date }}</h5>
         </div>
-        <div class="comments">
-            {% for review in reviews %}
-                <div class="review_block">
-                    <h6>{{ review.text }}</h6>
-                    <p>{{ review.created_date }}</p>
-                </div>
-            {% endfor %}
-        </div>
+        {% if products.reviewtable %}
+            <form action="/products/{{ products.id }}/" method="post">
+                {% csrf_token %}
+                {{ review_form }}
+                <input type="submit" class="btn">
+            </form>
+            <div class="comments">
+                {% for review in reviews %}
+                    <div class="review_block">
+                        <h6>{{ review.text }}</h6>
+                        <p>{{ review.created_date }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
     </div>
 {% endblock %}
