@@ -46,7 +46,7 @@ def products_detail_view(request, id):
                 post_id=id,
                 text=form.cleaned_data.get('text')
             )
-            return redirect(f'/posts/{id}/')
+            return redirect(f'/products/{id}/')
         else:
             return render(request, 'products/detail.html', context={
                 'products': product,
