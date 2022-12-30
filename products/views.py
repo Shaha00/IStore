@@ -20,7 +20,8 @@ def product_view(request):
             product = Product.objects.all()
 
         return render(request, 'products/products.html', context={
-            'products': product
+            'products': product,
+            'user': None if request.user.is_anonymous else request.user
         })
 
 
@@ -43,6 +44,7 @@ def products_detail_view(request, id):
 
         if form.is_valid():
             Review.objects.create(
+                author=request.user,
                 post_id=id,
                 text=form.cleaned_data.get('text')
             )
@@ -73,11 +75,12 @@ def products_create_view(request):
             'form': ProductCreateForm
         })
 
-    if request.method == "PRODUCT":
+    if request.method == "POST":
         form = ProductCreateForm(data=request.POST)
 
         if form.is_valid():
             Product.objects.create(
+                author=request.user,
                 title=form.cleaned_data.get('title'),
                 description=form.cleaned_data.get('description'),
                 rate=form.cleaned_data.get('rate', 0),
