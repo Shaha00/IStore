@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from products.views import main_view, product_view, products_detail_view, categories_view, products_create_view
+from products.views import main_view, product_view, products_detail_view, categories_view, products_create_view, ProductCBV, ProductDetailCBV, CategoriesCBV, ProductsCreateCBV
 from django.conf.urls.static import static
 from IiStore import settings
 from users.views import login_view, logout_view, register_view
@@ -23,10 +23,10 @@ from users.views import login_view, logout_view, register_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main_view),
-    path('products/', product_view),
-    path('products/<int:id>/', products_detail_view),
-    path('products/create/', products_create_view),
-    path('categories/', categories_view),
+    path('products/', ProductCBV.as_view()),
+    path('products/<int:id>/', ProductDetailCBV.as_view()),
+    path('products/create/', ProductsCreateCBV.as_view()),
+    path('categories/', CategoriesCBV.as_view()),
 
     path('users/login/', login_view),
     path('users/logout/', logout_view),
@@ -34,3 +34,4 @@ urlpatterns = [
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
